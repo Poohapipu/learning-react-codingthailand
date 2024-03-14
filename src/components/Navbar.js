@@ -1,45 +1,74 @@
-import React from "react";
-import { Nav, NavDropdown, Form, FormControl, Button } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import { NavLink, useHistory } from "react-router-dom";
 
-const Navbar = () => {
+const NavbarComponent = () => {
+  const history = useHistory();
+
   return (
-    <>
-      <Navbar bg="light" expand="lg">
-        <Navbar.Brand href="#home">
-      <img
-        src="./logo192.png"
-        width="30"
-        height="30"
-        className="d-inline-block align-top"
-        alt="React Bootstrap logo"
-      />
-      Happy 888
-    </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
-          </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">Search</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
-    </>
+    <Navbar expand="lg" bg="success" variant="dark">
+      <NavLink className="navbar-brand" to="/" exact>
+        <img
+          src="./logo192.png"
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+          alt="React Bootstrap logo"
+        />
+        Happy 888
+      </NavLink>
+      {/* <Navbar.Brand href="#home">
+          <img
+            src="./logo192.png"
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt="React Bootstrap logo"
+          />
+          Happy 888
+        </Navbar.Brand> */}
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <NavLink className="nav-link" to="/" exact>
+            หน้าแรก
+          </NavLink>
+          <NavLink className="nav-link" to="/Product" exact>
+            สินค้า
+          </NavLink>
+          <NavLink className="nav-link" to="/about" exact>
+            เกี่ยวกับเรา
+          </NavLink>
+          <NavDropdown
+            title="Workshop (Pagination + CRUD)"
+            id="basic-nav-dropdown"
+          >
+            <NavDropdown.Item
+              onClick={() => {
+                history.replace("/hospital");
+              }}
+            >
+              ข้อมูลสถานพยาบาล
+            </NavDropdown.Item>
+
+            <NavDropdown.Divider />
+
+            <NavDropdown.Item
+              onClick={() => {
+                history.replace("/category");
+              }}
+            >
+              หมวดหมู่ข่าว (CRUD)
+            </NavDropdown.Item>
+          </NavDropdown>
+          <NavLink className="nav-link" to="/upload" exact>
+            อัพโหลดไฟล์
+          </NavLink>
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
 
-export default Navbar;
+export default NavbarComponent;
